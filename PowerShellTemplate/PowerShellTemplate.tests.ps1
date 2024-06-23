@@ -18,6 +18,27 @@
 	None.
 
 	.EXAMPLE
+	PS> .\PowerShellTemplate.tests.ps1
+
+	Starting discovery in 1 files.
+	Discovery found 6 tests in 182ms.
+	Running tests.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psd1'.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellClassTemplate.psm1'.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellEnumTemplate.psm1'.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psm1'.
+	VERBOSE: Exporting function 'Get-Function'.
+	VERBOSE: Importing function 'Get-Function'.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psd1'.
+	VERBOSE: Removing the imported "Get-Function" function.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellClassTemplate.psm1'.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellEnumTemplate.psm1'.
+	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psm1'.
+	VERBOSE: Exporting function 'Get-Function'.
+	VERBOSE: Importing function 'Get-Function'.
+	[+] D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.tests.ps1 741ms (233ms|358ms)
+	Tests completed in 758ms
+	Tests Passed: 6, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 
 	.NOTES
 	None.
