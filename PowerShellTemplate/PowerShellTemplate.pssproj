@@ -25,7 +25,12 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include=".github\CODEOWNERS" />
+    <Content Include="LICENSE" />
+    <Content Include="PowerShellTemplate.licenseheader" />
+    <Content Include="README.md" />
+  </ItemGroup>
   <ItemGroup>
     <Compile Include="PowerShellClassTemplate.psd1" />
     <Compile Include="PowerShellClassTemplate.psm1" />
