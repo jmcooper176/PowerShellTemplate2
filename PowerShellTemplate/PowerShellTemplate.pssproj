@@ -27,7 +27,9 @@
   </PropertyGroup>
   <ItemGroup />
   <ItemGroup>
+    <Compile Include="PowerShellClassTemplate.psd1" />
     <Compile Include="PowerShellClassTemplate.psm1" />
+    <Compile Include="PowerShellClassTemplate.tests.ps1" />
     <Compile Include="PowerShellEnumTemplate.psm1" />
     <Compile Include="PowerShellTemplate.psd1" />
     <Compile Include="PowerShellTemplate.psm1" />
