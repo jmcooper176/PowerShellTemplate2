@@ -40,5 +40,8 @@
     <Compile Include="PowerShellTemplate.psm1" />
     <Compile Include="PowerShellTemplate.tests.ps1" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include=".github\" />
+  </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets" Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
 </Project>
