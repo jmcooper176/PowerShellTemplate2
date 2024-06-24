@@ -53,6 +53,14 @@ Describe "Get-Function" {
 			Import-Module -Name $modulePath -Verbose -Force
 		}
 
+		AfterAll {
+			@('PowerShellTemplate') | ForEach-Object -Process {
+				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+					Remove-Module -Name $_ -Verbose -Force
+				}
+			}
+		}
+
 		It "Module Path should exist" {
 			# Act and Assert
 			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
@@ -72,6 +80,14 @@ Describe "Get-Function" {
 			# Arrange
 			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellTemplate.psd1
 			Import-Module -Name $modulePath -Verbose -Force
+		}
+
+		AfterAll {
+			@('PowerShellTemplate') | ForEach-Object -Process {
+				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+					Remove-Module -Name $_ -Verbose -Force
+				}
+			}
 		}
 
 		It "Should Return the Same 'Value' Passed as a Parameter" {

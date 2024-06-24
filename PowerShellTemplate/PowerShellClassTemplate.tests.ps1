@@ -21,24 +21,11 @@
 	PS> .\PowerShellClassTemplate.tests.ps1
 
 	Starting discovery in 1 files.
-	Discovery found 6 tests in 182ms.
+	Discovery found 3 tests in 102ms.
 	Running tests.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psd1'.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellClassTemplate.psm1'.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellEnumTemplate.psm1'.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psm1'.
-	VERBOSE: Exporting function 'Get-Function'.
-	VERBOSE: Importing function 'Get-Function'.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psd1'.
-	VERBOSE: Removing the imported "Get-Function" function.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellClassTemplate.psm1'.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellEnumTemplate.psm1'.
-	VERBOSE: Loading module from path 'D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.psm1'.
-	VERBOSE: Exporting function 'Get-Function'.
-	VERBOSE: Importing function 'Get-Function'.
-	[+] D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellTemplate.tests.ps1 741ms (233ms|358ms)
+	[+] D:\GitHub\PowerShellTemplate\PowerShellTemplate\PowerShellClassTemplate.tests.ps1 741ms (233ms|358ms)
 	Tests completed in 758ms
-	Tests Passed: 6, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
+	Tests Passed: 3, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 
 	.NOTES
 	None.
@@ -51,6 +38,14 @@ Describe "New-MyClass" {
 			# Arrange
 			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellClassTemplate.psd1
 			Import-Module -Name $modulePath -Verbose -Force
+		}
+
+		AfterAll {
+			@('PowerShellClassTemplate') | ForEach-Object -Process {
+				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+					Remove-Module -Name $_ -Verbose -Force
+				}
+			}
 		}
 
 		It "Module Path should exist" {
@@ -72,6 +67,14 @@ Describe "New-MyClass" {
 			# Arrange
 			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellClassTemplate.psd1
 			Import-Module -Name $modulePath -Verbose -Force
+		}
+
+		AfterAll {
+			@('PowerShellClassTemplate') | ForEach-Object -Process {
+				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+					Remove-Module -Name $_ -Verbose -Force
+				}
+			}
 		}
 
 		It "Property 'MyProperty' should be set to expected value" {
