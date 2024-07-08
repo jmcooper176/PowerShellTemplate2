@@ -42,19 +42,15 @@ $ExportableTypes = @(
     [Color]
 )
 
-# Get the internal TypeAccelerators class to use its static methods.
-$TypeAcceleratorsClass = [psobject].Assembly.GetType(
-    'System.Management.Automation.TypeAccelerators'
-)
-
 # Ensure none of the types would clobber an existing type accelerator.
 # If a type accelerator with the same name exists, throw an exception.
-$ExistingTypeAccelerators = $TypeAcceleratorsClass::Get
+$typeAcceleratorModulePath = Join-Path -Path $PWD -ChildPath 'TypeAccelerator.psd1'
+Import-Module -Name $typeAcceleratorModulePath
 
 $ExportableTypes | ForEach-Object -Process {
     $Type = $_
 
-    if ($Type.FullName -in $ExistingTypeAccelerators.Keys) {
+    if (Test-TypeAccelerator -Name $Type.FullName) {
         # ERROR:  Type accelerator already present
         $Message = @(
             $Type.Name
@@ -73,14 +69,13 @@ $ExportableTypes | ForEach-Object -Process {
         $PSCmdlet.ThrowTerminatingError($errorRecord)
     } else {
         # Add type accelerator
-        $TypeAcceleratorsClass::Add($Type.FullName, $Type)
+        Add-TypeAccelerator -Name $Type.FullName -Type $Type
     }
 }
 
 # Register Removal of type accelerator(s) when the module is removed.
 $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
     $ExportableTypes | ForEach-Object -Process {
-        $Type = $_
-        $TypeAcceleratorsClass::Remove($Type.FullName)
+        Remove-TypeAccelerator -Name $_.FullName
     }
 }.GetNewClosure()

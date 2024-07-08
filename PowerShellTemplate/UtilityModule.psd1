@@ -127,10 +127,10 @@ PrivateData = @{
         # Tags = @()
 
         # A URL to the license for this module.
-        # LicenseUri = ''
+        LicenseUri = 'https://opensource.org/license/BSD-3-clause'
 
         # A URL to the main website for this project.
-        # ProjectUri = ''
+        ProjectUri = 'https://github.com/jmcooper176/PowerShellTemplate2/'
 
         # A URL to an icon representing this module.
         # IconUri = ''
