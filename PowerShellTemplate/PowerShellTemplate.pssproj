@@ -39,6 +39,8 @@
     <Compile Include="PowerShellTemplate.psd1" />
     <Compile Include="PowerShellTemplate.psm1" />
     <Compile Include="PowerShellTemplate.tests.ps1" />
+    <Compile Include="TypeAcceleratorModule.psm1" />
+    <Compile Include="UtilityModule.psm1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include=".github\" />
