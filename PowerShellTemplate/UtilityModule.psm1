@@ -52,7 +52,7 @@ function Get-ModuleManifest {
 			'PowerShellHostVersion', 'PowerShellVersion', 'Prefix', 'PrivateData',
 			'ProcessorArchitecture', 'ProjectUri', 'ReleaseNotes',
 			'RepositorySourceLocation', 'RequiredAssemblies', 'RequiredModules',
-			'RootModule', 'Scripts', 'SessionState', 'Tags', 'Version'
+			'RootModule', 'Scripts', 'SessionState', 'Tags', 'Version')]
 		[string[]]
 		$Property
 	)

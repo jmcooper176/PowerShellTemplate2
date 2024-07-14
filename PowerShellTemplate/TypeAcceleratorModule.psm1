@@ -69,8 +69,8 @@ function Add-TypeAccelerator {
 
 					$errorRecord = [System.Management.Automation.ErrorRecord]::new(
 						[System.InvalidOperationException]::($message),
-						"$($CmdletName)-InvalidOperationExceptin-$($MyInvocation.ScriptLineNumber)",
-						'InvalidOperation'
+						"$($CmdletName)-InvalidOperationException-$($MyInvocation.ScriptLineNumber)",
+						'InvalidOperation',
 						$_)
 
 					Write-Error -ErrorRecord $errorRecord -ErrorAction Continue
@@ -121,6 +121,7 @@ function Get-TypeAccelerator {
 
 	$accelerators = [psobject].Assembly.GetType(
 		'System.Management.Automation.TypeAccelerators'
+	)
 
 	if ($ListAvailable.IsPresent) {
 		$accelerators::Get | Select-Object -ExpandProperty Keys | Write-Output
@@ -149,9 +150,9 @@ function Get-TypeAccelerator {
 }
 
 <#
-	New-TypeAccelerators
+	New-TypeAccelerator
 #>
-function New-TypeAccelerators {
+function New-TypeAccelerator {
 	[CmdletBinding(SupportsShouldProcess)]
 	param ()
 
@@ -215,6 +216,7 @@ function Remove-TypeAccelerator {
 
 		$accelerators = [psobject].Assembly.GetType(
 			'System.Management.Automation.TypeAccelerators'
+		)
 	}
 
 	PROCESS {
