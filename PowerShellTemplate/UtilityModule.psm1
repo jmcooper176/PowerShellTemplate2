@@ -1,5 +1,5 @@
 <#
-Copyright 2024, John Merryweather Cooper.  All Rights Reserved.
+Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -75,6 +75,60 @@ function Get-ModuleManifest {
 			Test-ModuleManifest -Path $_ | Select-Object -Property $Property | Write-Output
 		}
 	}
+}
+
+<#
+	New-ErrorRecord
+#>
+function New-ErrorRecord {
+	[CmdletBinding(SupportsShouldProcess)]
+	param (
+		[Parameter(Mandatory)]
+		[System.Exception]
+		$Exception,
+
+		[Parameter(Mandatory)]
+		[ValidateNotNullOrEmpty()]
+		[string]
+		$ErrorId,
+
+		[Parameter(Mandatory)]
+		[ValidateSet()]
+		[System.Management.Automation.ErrorCategory]
+		$ErrorCategory,
+
+		[Parameter(Mandatory)]
+		[AllowNull()]
+		[System.Object]
+		$TargetObject
+	)
+
+	if ($PSVersionTable.PSVersion.Major -gt 5) {
+		Set-StrictMode -Version latest
+	} elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+		Set-StrictMode -Version 3.0
+	} else {
+		Set-StrictMode -Version 2.0
+	}
+
+	Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+
+	$argumentList = New-Object -TypeName System.Collections.ArrayList | Out-Null
+	$argumentList.Add($Exception) | Out-Null
+	$argumentList.Add($ErrorId) | Out-Null
+	$argumentList.Add($ErrorCategory) | Out-Null
+	$argumentList.Add($TargetObject) | Out-Null
+
+	if ($PSCmdlet.ShouldProcess($Exception.GetType().Name, $CmdletName)) {
+		New-Object -TypeName System.Management.Automation.ErrorRecord -ArgumentList $argumentList.ToArray() | Write-Output
+	}
+}
+
+<#
+	Write-Exception
+#>
+function Write-Exception {
+
 }
 
 <#

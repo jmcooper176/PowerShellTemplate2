@@ -1,5 +1,5 @@
 <#
-Copyright 2024, John Merryweather Cooper.  All Rights Reserved.
+Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -56,7 +56,7 @@ Author = 'John Merryweather Cooper'
 CompanyName = 'U.S. Office Personnel Management'
 
 # Copyright statement for this module
-Copyright = '(c) 2024, U.S. Office of Personnel Management.  All Rights Reserved.'
+Copyright = 'Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.'
 
 # Description of the functionality provided by this module
 Description = 'PowerShell Enum Template'
@@ -158,4 +158,3 @@ PrivateData = @{
 # DefaultCommandPrefix = ''
 
 }
-

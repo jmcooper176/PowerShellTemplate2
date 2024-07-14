@@ -1,5 +1,5 @@
 <#
-Copyright 2024, John Merryweather Cooper.  All Rights Reserved.
+Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
 
 Redistribution and use in source and binary forms, with or without modification,
 are permitted provided that the following conditions are met:
@@ -53,7 +53,7 @@ GUID = '9dc02e84-1e1c-48da-af27-579184f77dfb'
 Author = 'John Merryweather Cooper'
 
 # Company or vendor of this module
-CompanyName = 'U.S. Office of Personnel Management'
+CompanyName = 'John Merryweather Cooper'
 
 # Copyright statement for this module
 Copyright = 'Copyright (c) 2024, U.S. Office of Personnel Managment.  All Rights Reserved.'
