@@ -60,26 +60,25 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	None.
 #>
 
-
 Describe "Color Enumeration" {
-	Context "Type Accelerator" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellEnumTemplate.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Type Accelerator" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath PowerShellEnumTemplate.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('PowerShellEnumTemplate') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('PowerShellEnumTemplate') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
-	}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
+    }
 }

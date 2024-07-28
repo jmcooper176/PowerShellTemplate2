@@ -73,82 +73,81 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	None.
 #>
 
-
 Describe "Get-Function" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellTemplate.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath PowerShellTemplate.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('PowerShellTemplate') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('PowerShellTemplate') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Get-Function'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Get-Function'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Function Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellTemplate.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath PowerShellTemplate.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('PowerShellTemplate') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('PowerShellTemplate') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Should Return the Same 'Value' Passed as a Parameter" {
-			# Arrange
-			$expected = 'Test'
+        It "Should Return the Same 'Value' Passed as a Parameter" {
+            # Arrange
+            $expected = 'Test'
 
-			# Act and Assert
-			Get-Function -Value $expected | Should -BeExactly $expected
-		}
+            # Act and Assert
+            Get-Function -Value $expected | Should -BeExactly $expected
+        }
 
-		It "Should Return the Same 'Value' with spaces Passed as a Parameter" {
-			# Arrange
-			$expected = 'This is a Test'
+        It "Should Return the Same 'Value' with spaces Passed as a Parameter" {
+            # Arrange
+            $expected = 'This is a Test'
 
-			# Act and Assert
-			Get-Function -Value $expected | Should -BeExactly $expected
-		}
+            # Act and Assert
+            Get-Function -Value $expected | Should -BeExactly $expected
+        }
 
-		It "Should throw on null" {
-			# Arrange
-			$test = $null
+        It "Should throw on null" {
+            # Arrange
+            $test = $null
 
-			# Act and Assert
-			{ Get-Function -Value $test } | Should -Throw
-		}
+            # Act and Assert
+            { Get-Function -Value $test } | Should -Throw
+        }
 
-		It "Should throw on empty string" {
-			# Arrange
-			$test = ''
+        It "Should throw on empty string" {
+            # Arrange
+            $test = ''
 
-			# Act and Assert
-			{ Get-Function -Value $test } | Should -Throw
-		}
-	}
+            # Act and Assert
+            { Get-Function -Value $test } | Should -Throw
+        }
+    }
 }

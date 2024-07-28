@@ -74,330 +74,330 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #>
 
 Describe "Add-TypeAccelerator" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Add-TypeAccelerator'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Add-TypeAccelerator'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Type-Accelerator Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Type-Accelerator Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }
 
 Describe "Get-TypeAccelerator" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Get-TypeAccelerator'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Get-TypeAccelerator'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Get-Accelerator Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Get-Accelerator Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }
 
 Describe "New-TypeAccelerators" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'New-TypeAccelerators'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'New-TypeAccelerators'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "New-Accelerators Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "New-Accelerators Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }
 
 Describe "Get-TypeAccelerator" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Get-TypeAccelerator'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Get-TypeAccelerator'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Get-Accelerator Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Get-Accelerator Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }
 
 Describe "Remove-TypeAccelerator" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Remove-TypeAccelerator'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Remove-TypeAccelerator'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Remove-Accelerator Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Remove-Accelerator Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }
 
 Describe "Get-TypeAccelerator" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Get-TypeAccelerator'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Get-TypeAccelerator'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Get-Accelerator Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Get-Accelerator Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }
 
 Describe "Test-TypeAccelerator" {
-	Context "Function Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Function Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'Test-TypeAccelerator'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'Test-TypeAccelerator'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Test-Accelerator Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Test-Accelerator Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath TypeAcceleratorModule.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('TypeAcceleratorModule') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
-	}
+        AfterAll {
+            @('TypeAcceleratorModule') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
+    }
 }

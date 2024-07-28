@@ -60,60 +60,58 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	None.
 #>
 
-
 Describe "New-MyClass" {
-	Context "Factory Exists" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellClassTemplate.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Factory Exists" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath PowerShellClassTemplate.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('PowerShellClassTemplate') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('PowerShellClassTemplate') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Module Path should exist" {
-			# Act and Assert
-			Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
-		}
+        It "Module Path should exist" {
+            # Act and Assert
+            Test-Path -LiteralPath $modulePath -PathType Leaf | Should -BeTrue
+        }
 
-		It "Should Import" {
-			# Arrange
-			$functionPath = Join-Path -Path function: -ChildPath 'New-MyClass'
+        It "Should Import" {
+            # Arrange
+            $functionPath = Join-Path -Path function: -ChildPath 'New-MyClass'
 
-			# Act and Assert
-			Test-Path -LiteralPath $functionPath | Should -BeTrue
-		}
-	}
+            # Act and Assert
+            Test-Path -LiteralPath $functionPath | Should -BeTrue
+        }
+    }
 
-	Context "Factory Performs as Designed" {
-		BeforeAll {
-			# Arrange
-			$modulePath = Join-Path -Path $PWD -ChildPath PowerShellClassTemplate.psd1
-			Import-Module -Name $modulePath -Verbose -Force
-		}
+    Context "Factory Performs as Designed" {
+        BeforeAll {
+            # Arrange
+            $modulePath = Join-Path -Path $PWD -ChildPath PowerShellClassTemplate.psd1
+            Import-Module -Name $modulePath -Verbose -Force
+        }
 
-		AfterAll {
-			@('PowerShellClassTemplate') | ForEach-Object -Process {
-				if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
-					Remove-Module -Name $_ -Verbose -Force
-				}
-			}
-		}
+        AfterAll {
+            @('PowerShellClassTemplate') | ForEach-Object -Process {
+                if (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_) {
+                    Remove-Module -Name $_ -Verbose -Force
+                }
+            }
+        }
 
-		It "Property 'MyProperty' should be set to expected value" {
-			# Arrange
-			$instance = New-MyClass
-			$expected = 'MyValue'
+        It "Property 'MyProperty' should be set to expected value" {
+            # Arrange
+            $instance = New-MyClass
+            $expected = 'MyValue'
 
-			# Act and Assert
-			$instance.MyProperty | Should -BeExactly $expected
-		}
-
-	}
+            # Act and Assert
+            $instance.MyProperty | Should -BeExactly $expected
+        }
+    }
 }

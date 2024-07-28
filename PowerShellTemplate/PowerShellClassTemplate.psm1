@@ -30,8 +30,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <#
     class : MyClass
 #>
-class MyClass
-{
+class MyClass {
     <#
         Properties
     #>
@@ -43,21 +42,18 @@ class MyClass
         Public methods
     #>
     MyPublicMethod() {
-
     }
 
     <#
         Static methods
     #>
     static MyStaticMethod() {
-
     }
 
     <#
         Private methods
     #>
     hidden MyPrivateMethod() {
-
     }
 
     <#
@@ -77,9 +73,11 @@ function New-MyClass {
 
     if ($PSVersionTable.PSVersion.Major -gt 5) {
         Set-StrictMode -Version latest
-    } elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+    }
+    elseif ($PSVersionTable.PSVersion.Major -ge 3) {
         Set-StrictMode -Version 3.0
-    } else {
+    }
+    else {
         Set-StrictMode -Version 2.0
     }
 
@@ -99,7 +97,6 @@ $ExportableTypes = @(
 # If a type accelerator with the same name exists, throw an exception.
 $typeAcceleratorModulePath = Join-Path -Path $PWD -ChildPath 'TypeAccelerator.psd1'
 Import-Module -Name $typeAcceleratorModulePath
-
 
 $ExportableTypes | ForEach-Object -Process {
     $Type = $_
@@ -121,7 +118,8 @@ $ExportableTypes | ForEach-Object -Process {
 
         Write-Error -ErrorRecord $errorRecord -ErrorAction Continue
         $PSCmdlet.ThrowTerminatingError($errorRecord)
-    } else {
+    }
+    else {
         # Add type accelerator
         Add-TypeAccelerator -Name $Type.FullName -Type $Type
     }

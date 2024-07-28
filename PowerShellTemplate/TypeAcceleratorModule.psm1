@@ -31,56 +31,59 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 	Add-TypeAccelerator
 #>
 function Add-TypeAccelerator {
-	[CmdletBinding(SupportsShouldProcess)]
-	param (
-		[Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
-		[System.Type[]]
-		$Type
-	)
+    [CmdletBinding(SupportsShouldProcess)]
+    param (
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [System.Type[]]
+        $Type
+    )
 
-	BEGIN {
-		if ($PSVersionTable.PSVersion.Major -gt 5) {
-			Set-StrictMode -Version latest
-		} elseif ($PSVersionTable.PSVersion.Major -ge 3) {
-			Set-StrictMode -Version 3.0
-		} else {
-			Set-StrictMode -Version 2.0
-		}
+    BEGIN {
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            Set-StrictMode -Version latest
+        }
+        elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+            Set-StrictMode -Version 3.0
+        }
+        else {
+            Set-StrictMode -Version 2.0
+        }
 
-		Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+        Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
 
-		$accelerators = [psobject].Assembly.GetType(
-			'System.Management.Automation.TypeAccelerators'
-		)
-	}
+        $accelerators = [psobject].Assembly.GetType(
+            'System.Management.Automation.TypeAccelerators'
+        )
+    }
 
-	PROCESS {
-		$Type | ForEach-Object -Process {
-			if ($PSCmdlet.ShouldProcess($_.FullName, $CmdletName)) {
-				if ($accelerators::Get.TryAdd($_.FullName, $_)) {
-					$MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
-						Remove-TypeAccelerator -Name $_.FullName
-					}.GetNewClosure()
-				} else {
-					$message = @(
-						$CmdletName
-						"Failed adding $($_.FullName) to [TypeAccelerators]"
-					) -join ' : '
+    PROCESS {
+        $Type | ForEach-Object -Process {
+            if ($PSCmdlet.ShouldProcess($_.FullName, $CmdletName)) {
+                if ($accelerators::Get.TryAdd($_.FullName, $_)) {
+                    $MyInvocation.MyCommand.ScriptBlock.Module.OnRemove = {
+                        Remove-TypeAccelerator -Name $_.FullName
+                    }.GetNewClosure()
+                }
+                else {
+                    $message = @(
+                        $CmdletName
+                        "Failed adding $($_.FullName) to [TypeAccelerators]"
+                    ) -join ' : '
 
-					$errorRecord = [System.Management.Automation.ErrorRecord]::new(
-						[System.InvalidOperationException]::($message),
-						"$($CmdletName)-InvalidOperationException-$($MyInvocation.ScriptLineNumber)",
-						'InvalidOperation',
-						$_)
+                    $errorRecord = [System.Management.Automation.ErrorRecord]::new(
+                        [System.InvalidOperationException]::($message),
+                        "$($CmdletName)-InvalidOperationException-$($MyInvocation.ScriptLineNumber)",
+                        'InvalidOperation',
+                        $_)
 
-					Write-Error -ErrorRecord $errorRecord -ErrorAction Continue
-					$PSCmdlet.ThrowTerminatingError($errorRecord)
-				}
-			}
-		}
-	}
+                    Write-Error -ErrorRecord $errorRecord -ErrorAction Continue
+                    $PSCmdlet.ThrowTerminatingError($errorRecord)
+                }
+            }
+        }
+    }
 
-	<#
+    <#
 		.SYNOPSIS
 		.DESCRIPTION
 		.PARAMETER Type
@@ -99,42 +102,46 @@ function Add-TypeAccelerator {
 	Get-TypeAccelerator
 #>
 function Get-TypeAccelerator {
-	[CmdletBinding()]
-	param (
-		[ValidateNotNullOrEmpty()]
-		[string]
-		$Key,
+    [CmdletBinding()]
+    param (
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Key,
 
-		[switch]
-		$ListAvailable
-	)
+        [switch]
+        $ListAvailable
+    )
 
-	if ($PSVersionTable.PSVersion.Major -gt 5) {
-		Set-StrictMode -Version latest
-	} elseif ($PSVersionTable.PSVersion.Major -ge 3) {
-		Set-StrictMode -Version 3.0
-	} else {
-		Set-StrictMode -Version 2.0
-	}
+    if ($PSVersionTable.PSVersion.Major -gt 5) {
+        Set-StrictMode -Version latest
+    }
+    elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+        Set-StrictMode -Version 3.0
+    }
+    else {
+        Set-StrictMode -Version 2.0
+    }
 
-	Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name
+    Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name
 
-	$accelerators = [psobject].Assembly.GetType(
-		'System.Management.Automation.TypeAccelerators'
-	)
+    $accelerators = [psobject].Assembly.GetType(
+        'System.Management.Automation.TypeAccelerators'
+    )
 
-	if ($ListAvailable.IsPresent) {
-		$accelerators::Get | Select-Object -ExpandProperty Keys | Write-Output
-	} elseif ($PSBoundParameters.ContainsKey('Key')) {
-		[ref]$acceleratorType = $null
-		if ($accelerators::Get.TryGetValue($Key, $acceleratorType)) {
-			$acceleratorType | Write-Output
-		} else {
-			$null | Write-Output
-		}
-	}
+    if ($ListAvailable.IsPresent) {
+        $accelerators::Get | Select-Object -ExpandProperty Keys | Write-Output
+    }
+    elseif ($PSBoundParameters.ContainsKey('Key')) {
+        [ref]$acceleratorType = $null
+        if ($accelerators::Get.TryGetValue($Key, $acceleratorType)) {
+            $acceleratorType | Write-Output
+        }
+        else {
+            $null | Write-Output
+        }
+    }
 
-	<#
+    <#
 		.SYNOPSIS
 		.DESCRIPTION
 		.PARAMETER Type
@@ -153,26 +160,28 @@ function Get-TypeAccelerator {
 	New-TypeAccelerator
 #>
 function New-TypeAccelerator {
-	[CmdletBinding(SupportsShouldProcess)]
-	param ()
+    [CmdletBinding(SupportsShouldProcess)]
+    param ()
 
-	if ($PSVersionTable.PSVersion.Major -gt 5) {
-		Set-StrictMode -Version latest
-	} elseif ($PSVersionTable.PSVersion.Major -ge 3) {
-		Set-StrictMode -Version 3.0
-	} else {
-		Set-StrictMode -Version 2.0
-	}
+    if ($PSVersionTable.PSVersion.Major -gt 5) {
+        Set-StrictMode -Version latest
+    }
+    elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+        Set-StrictMode -Version 3.0
+    }
+    else {
+        Set-StrictMode -Version 2.0
+    }
 
-	Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+    Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
 
-	$typeAccelerators = [psobject].Assembly.GetType(
-		'System.Management.Automation.TypeAccelerators'
-	)
+    $typeAccelerators = [psobject].Assembly.GetType(
+        'System.Management.Automation.TypeAccelerators'
+    )
 
-	Add-TypeAccelerator -Type $typeAccelerators | Write-Output
+    Add-TypeAccelerator -Type $typeAccelerators | Write-Output
 
-	<#
+    <#
 		.SYNOPSIS
 		.DESCRIPTION
 		.PARAMETER Type
@@ -191,49 +200,52 @@ function New-TypeAccelerator {
 	Remove-TypeAccelerator
 #>
 function Remove-TypeAccelerator {
-	[CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'UsingType')]
-	[OutputType([bool])]
-	param (
-		[Parameter(Mandatory, ParameterSetName = 'UsingName', ValueFromPipelineByPropertyName)]
-		[string[]]
-		$Name,
+    [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'UsingType')]
+    [OutputType([bool])]
+    param (
+        [Parameter(Mandatory, ParameterSetName = 'UsingName', ValueFromPipelineByPropertyName)]
+        [string[]]
+        $Name,
 
-		[Parameter(Mandatory, ParameterSetName = 'UsingType', ValueFromPipeline, ValueFromPipelineByPropertyName)]
-		[System.Type[]]
-		$Type
-	)
+        [Parameter(Mandatory, ParameterSetName = 'UsingType', ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [System.Type[]]
+        $Type
+    )
 
-	BEGIN {
-		if ($PSVersionTable.PSVersion.Major -gt 5) {
-			Set-StrictMode -Version latest
-		} elseif ($PSVersionTable.PSVersion.Major -ge 3) {
-			Set-StrictMode -Version 3.0
-		} else {
-			Set-StrictMode -Version 2.0
-		}
+    BEGIN {
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            Set-StrictMode -Version latest
+        }
+        elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+            Set-StrictMode -Version 3.0
+        }
+        else {
+            Set-StrictMode -Version 2.0
+        }
 
-		Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+        Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
 
-		$accelerators = [psobject].Assembly.GetType(
-			'System.Management.Automation.TypeAccelerators'
-		)
-	}
+        $accelerators = [psobject].Assembly.GetType(
+            'System.Management.Automation.TypeAccelerators'
+        )
+    }
 
-	PROCESS {
-		if ($PSCmdlet.ParameterSetName -eq 'UsingName') {
-			$Name | ForEach-Object -Process {
-				if ($PSCmdlet.ShouldProcess($_, $CmdletName)) {
-					$accelerators::Remove($_) | Write-Output
-				}
-			}
-		} else {
-			$Type | ForEach-Object -Process {
-				Remove-TypeAccelerator -Name $_.FullName
-			}
-		}
-	}
+    PROCESS {
+        if ($PSCmdlet.ParameterSetName -eq 'UsingName') {
+            $Name | ForEach-Object -Process {
+                if ($PSCmdlet.ShouldProcess($_, $CmdletName)) {
+                    $accelerators::Remove($_) | Write-Output
+                }
+            }
+        }
+        else {
+            $Type | ForEach-Object -Process {
+                Remove-TypeAccelerator -Name $_.FullName
+            }
+        }
+    }
 
-	<#
+    <#
 		.SYNOPSIS
 		.DESCRIPTION
 		.PARAMETER Type
@@ -252,47 +264,50 @@ function Remove-TypeAccelerator {
 	Test-TypeAccelerator
 #>
 function Test-TypeAccelerator {
-	[CmdletBinding(DefaultParameterSetName = 'UsingType')]
-	[OutputType([bool])]
-	param (
-		[Parameter(Mandatory, ParameterSetName = 'UsingName', ValueFromPipelineByPropertyName)]
-		[string[]]
-		$Name,
+    [CmdletBinding(DefaultParameterSetName = 'UsingType')]
+    [OutputType([bool])]
+    param (
+        [Parameter(Mandatory, ParameterSetName = 'UsingName', ValueFromPipelineByPropertyName)]
+        [string[]]
+        $Name,
 
-		[Parameter(Mandatory, ParameterSetName = 'UsingType', ValueFromPipeline, ValueFromPipelineByPropertyName)]
-		[System.Type[]]
-		$Type
-	)
+        [Parameter(Mandatory, ParameterSetName = 'UsingType', ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [System.Type[]]
+        $Type
+    )
 
-	BEGIN {
-		if ($PSVersionTable.PSVersion.Major -gt 5) {
-			Set-StrictMode -Version latest
-		} elseif ($PSVersionTable.PSVersion.Major -ge 3) {
-			Set-StrictMode -Version 3.0
-		} else {
-			Set-StrictMode -Version 2.0
-		}
+    BEGIN {
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            Set-StrictMode -Version latest
+        }
+        elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+            Set-StrictMode -Version 3.0
+        }
+        else {
+            Set-StrictMode -Version 2.0
+        }
 
-		Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name
+        Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name
 
-		$accelerators = [psobject].Assembly.GetType(
-			'System.Management.Automation.TypeAccelerators'
-		)
-	}
+        $accelerators = [psobject].Assembly.GetType(
+            'System.Management.Automation.TypeAccelerators'
+        )
+    }
 
-	PROCESS {
-		if ($PSCmdlet.ParameterSetName -eq 'UsingName') {
-			$Name | ForEach-Object -Process {
-				$accelerators::Get.ContainsKey($_) | Write-Output
-			}
-		} else {
-			$Type | ForEach-Object -Process {
-				$accelerators::Get.ContainsValue($_) | Write-Output
-			}
-		}
-	}
+    PROCESS {
+        if ($PSCmdlet.ParameterSetName -eq 'UsingName') {
+            $Name | ForEach-Object -Process {
+                $accelerators::Get.ContainsKey($_) | Write-Output
+            }
+        }
+        else {
+            $Type | ForEach-Object -Process {
+                $accelerators::Get.ContainsValue($_) | Write-Output
+            }
+        }
+    }
 
-	<#
+    <#
 		.SYNOPSIS
 		Test `Name` or `Type` for whether there is a matching [TypeAccelerator]
 		already created.

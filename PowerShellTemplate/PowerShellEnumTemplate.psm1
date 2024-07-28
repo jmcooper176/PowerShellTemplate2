@@ -30,8 +30,7 @@ THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 <#
     enum: Color
 #>
-enum Color
-{
+enum Color {
     Red
     Green
     Blue
@@ -67,7 +66,8 @@ $ExportableTypes | ForEach-Object -Process {
 
         Write-Error -ErrorRecord $errorRecord -ErrorAction Continue
         $PSCmdlet.ThrowTerminatingError($errorRecord)
-    } else {
+    }
+    else {
         # Add type accelerator
         Add-TypeAccelerator -Name $Type.FullName -Type $Type
     }
