@@ -25,7 +25,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Content Include="CONTRIBUTING.md" />
+    <Content Include="LICENSE.txt" />
     <Content Include="PowerShellTemplate.licenseheader" />
+    <Content Include="README.md" />
+    <Content Include="SECURITY.md" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="PowerShellClassTemplate.psd1" />
@@ -33,11 +37,14 @@
     <Compile Include="PowerShellClassTemplate.tests.ps1" />
     <Compile Include="PowerShellEnumTemplate.psm1" />
     <Compile Include="PowerShellEnumTemplate.tests.ps1" />
+    <Compile Include="PowerShellEnumTemplates.psd1" />
     <Compile Include="PowerShellTemplate.psd1" />
     <Compile Include="PowerShellTemplate.psm1" />
     <Compile Include="PowerShellTemplate.tests.ps1" />
+    <Compile Include="TypeAcceleratorModule.psd1" />
     <Compile Include="TypeAcceleratorModule.psm1" />
     <Compile Include="TypeAcceleratorModule.tests.ps1" />
+    <Compile Include="UtilityModule.psd1" />
     <Compile Include="UtilityModule.psm1" />
     <Compile Include="UtilityModule.tests.ps1" />
   </ItemGroup>

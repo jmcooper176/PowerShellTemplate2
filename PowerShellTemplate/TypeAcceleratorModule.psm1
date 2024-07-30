@@ -1,34 +1,36 @@
 <#
-Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
+    Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
 
-Redistribution and use in source and binary forms, with or without modification,
-are permitted provided that the following conditions are met:
+    Redistribution and use in source and binary forms, with or without
+    modification, are permitted provided that the following conditions are
+    met:
 
-1. Redistributions of source code must retain the above copyright notice, this
-   list of conditions and the following disclaimer.
+    1. Redistributions of source code must retain the above copyright
+       notice, this list of conditions and the following disclaimer.
 
-2. Redistributions in binary form must reproduce the above copyright notice,
-   this list of conditions and the following disclaimer in the documentation
-   and/or other materials provided with the distribution.
+    2. Redistributions in binary form must reproduce the above copyright
+       notice, this list of conditions and the following disclaimer in the
+       documentation and/or other materials provided with the distribution.
 
-3. Neither the name of the copyright holder nor the names of its contributors
-   may be used to endorse or promote products derived from this software without
-   specific prior written permission.
+    3. Neither the name of the copyright holder nor the names of its
+       contributors may be used to endorse or promote products derived
+       from this software without specific prior written permission.
 
-THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS “AS IS” AND
-ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
-WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
-DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
-FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
-DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
-SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
-CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
-OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF
-THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+    THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+    "AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+    LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A
+    PARTICULAR PURPOSE ARE DISCLAIMED.  IN NO EVENT SHALL THE COPYRIGHT
+    HOLDER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL,
+    SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT
+    LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE,
+    DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND ON ANY
+    THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+    (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+    OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
 #>
 
 <#
-	Add-TypeAccelerator
+    Add-TypeAccelerator
 #>
 function Add-TypeAccelerator {
     [CmdletBinding(SupportsShouldProcess)]
@@ -84,22 +86,22 @@ function Add-TypeAccelerator {
     }
 
     <#
-		.SYNOPSIS
-		.DESCRIPTION
-		.PARAMETER Type
-		.INPUTS
-		.OUTPUTS
-		.EXAMPLE
-		.NOTES
-		.LINK
-		about_Advanced_Functions
-		.LINK
-		about_CommonParameters
-	#>
+        .SYNOPSIS
+        .DESCRIPTION
+        .PARAMETER Type
+        .INPUTS
+        .OUTPUTS
+        .EXAMPLE
+        .NOTES
+        .LINK
+        about_Advanced_Functions
+        .LINK
+        about_CommonParameters
+    #>
 }
 
 <#
-	Get-TypeAccelerator
+    Get-TypeAccelerator
 #>
 function Get-TypeAccelerator {
     [CmdletBinding()]
@@ -142,22 +144,22 @@ function Get-TypeAccelerator {
     }
 
     <#
-		.SYNOPSIS
-		.DESCRIPTION
-		.PARAMETER Type
-		.INPUTS
-		.OUTPUTS
-		.EXAMPLE
-		.NOTES
-		.LINK
-		about_Advanced_Functions
-		.LINK
-		about_CommonParameters
-	#>
+        .SYNOPSIS
+        .DESCRIPTION
+        .PARAMETER Type
+        .INPUTS
+        .OUTPUTS
+        .EXAMPLE
+        .NOTES
+        .LINK
+        about_Advanced_Functions
+        .LINK
+        about_CommonParameters
+    #>
 }
 
 <#
-	New-TypeAccelerator
+    New-TypeAccelerator
 #>
 function New-TypeAccelerator {
     [CmdletBinding(SupportsShouldProcess)]
@@ -182,22 +184,22 @@ function New-TypeAccelerator {
     Add-TypeAccelerator -Type $typeAccelerators | Write-Output
 
     <#
-		.SYNOPSIS
-		.DESCRIPTION
-		.PARAMETER Type
-		.INPUTS
-		.OUTPUTS
-		.EXAMPLE
-		.NOTES
-		.LINK
-		about_Advanced_Functions
-		.LINK
-		about_CommonParameters
-	#>
+        .SYNOPSIS
+        .DESCRIPTION
+        .PARAMETER Type
+        .INPUTS
+        .OUTPUTS
+        .EXAMPLE
+        .NOTES
+        .LINK
+        about_Advanced_Functions
+        .LINK
+        about_CommonParameters
+    #>
 }
 
 <#
-	Remove-TypeAccelerator
+    Remove-TypeAccelerator
 #>
 function Remove-TypeAccelerator {
     [CmdletBinding(SupportsShouldProcess, DefaultParameterSetName = 'UsingType')]
@@ -246,22 +248,22 @@ function Remove-TypeAccelerator {
     }
 
     <#
-		.SYNOPSIS
-		.DESCRIPTION
-		.PARAMETER Type
-		.INPUTS
-		.OUTPUTS
-		.EXAMPLE
-		.NOTES
-		.LINK
-		about_Advanced_Functions
-		.LINK
-		about_CommonParameters
-	#>
+        .SYNOPSIS
+        .DESCRIPTION
+        .PARAMETER Type
+        .INPUTS
+        .OUTPUTS
+        .EXAMPLE
+        .NOTES
+        .LINK
+        about_Advanced_Functions
+        .LINK
+        about_CommonParameters
+    #>
 }
 
 <#
-	Test-TypeAccelerator
+    Test-TypeAccelerator
 #>
 function Test-TypeAccelerator {
     [CmdletBinding(DefaultParameterSetName = 'UsingType')]
@@ -308,64 +310,64 @@ function Test-TypeAccelerator {
     }
 
     <#
-		.SYNOPSIS
-		Test `Name` or `Type` for whether there is a matching [TypeAccelerator]
-		already created.
+        .SYNOPSIS
+        Test `Name` or `Type` for whether there is a matching [TypeAccelerator]
+        already created.
 
-		.DESCRIPTION
-		`Test-TypeAccerator` tests `Name` or `Type` for whether there is a
-		matching [TypeAccelerator] already created.
+        .DESCRIPTION
+        `Test-TypeAccerator` tests `Name` or `Type` for whether there is a
+        matching [TypeAccelerator] already created.
 
-		.PARAMETER Name
-		Specifies the fully qualified dotted name for the [TypeAccelerator] to test
-		for.  This parameter is mandatory and mutually-exclusive with `Type`.
+        .PARAMETER Name
+        Specifies the fully qualified dotted name for the [TypeAccelerator] to test
+        for.  This parameter is mandatory and mutually-exclusive with `Type`.
 
-		.PARAMETER Type
-		Specifies the .NET type for the [TypeAccelerator] to test for.  This parameter
-		is mandatory and mutually-exclusive with `Name`.
+        .PARAMETER Type
+        Specifies the .NET type for the [TypeAccelerator] to test for.  This parameter
+        is mandatory and mutually-exclusive with `Name`.
 
-		.INPUTS
-		[string] `Test-TypeAccelerator accepts [string] as input from the PowerShell
-		pipeline.
+        .INPUTS
+        [string] `Test-TypeAccelerator accepts [string] as input from the PowerShell
+        pipeline.
 
-		[type]  `Test-TypeAccelerator accepts [type] as input from the PowerShell
-		pipeline.
+        [type]  `Test-TypeAccelerator accepts [type] as input from the PowerShell
+        pipeline.
 
-		.OUTPUTS
-		[bool] `Test-TypeAccelerator` outputs [bool] to the PowerShell pipeline.
+        .OUTPUTS
+        [bool] `Test-TypeAccelerator` outputs [bool] to the PowerShell pipeline.
 
-		.EXAMPLE
-		PS> Test-TypeAccelerator -Name 'System.XXX'
+        .EXAMPLE
+        PS> Test-TypeAccelerator -Name 'System.XXX'
 
-		False
+        False
 
-		Type 'System.XXX' does not have a [TypeAccelerator] associated with it.
+        Type 'System.XXX' does not have a [TypeAccelerator] associated with it.
 
-		.EXAMPLE
-		PS> [int] | Test-TypeAccelerator
+        .EXAMPLE
+        PS> [int] | Test-TypeAccelerator
 
-		True
+        True
 
-		Type [int] does have a [TypeAccelerator] associated with it.
+        Type [int] does have a [TypeAccelerator] associated with it.
 
-		.NOTES
-		Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
+        .NOTES
+        Copyright (c) 2024, John Merryweather Cooper.  All Rights Reserved.
 
-		See LICENSE included with this script.
+        See LICENSE included with this script.
 
-		.LINK
-		about_Advanced_Functions
+        .LINK
+        about_Advanced_Functions
 
-		.LINK
-		about_CommonParameters
+        .LINK
+        about_CommonParameters
 
-		.LINK
-		ForEach-Object
+        .LINK
+        ForEach-Object
 
-		.LINK
-		Set-StrictMode
+        .LINK
+        Set-StrictMode
 
-		.LINK
-		Set-Variable
-	#>
+        .LINK
+        Set-Variable
+    #>
 }
