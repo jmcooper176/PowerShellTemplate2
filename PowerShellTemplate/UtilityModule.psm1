@@ -30,6 +30,43 @@
 #>
 
 <#
+    Format-ErrorId
+#>
+function Format-ErrorId {
+    [CmdletBinding()]
+    [OutputType([string])]
+    param (
+        [Parameter(Mandatory)]
+        [ValidateNotNullOrEmpty()]
+        [string]
+        $Caller,
+
+        [Parameter(Mandatory)]
+        [System.Exception]
+        $Exception,
+
+        [Parameter(Mandatory)]
+        [ValidateRange(1, 2147483647)]
+        [int]
+        $Line
+    )
+
+    if ($PSVersionTable.PSVersion.Major -gt 5) {
+        Set-StrictMode -Version latest
+    }
+    elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+        Set-StrictMode -Version 3.0
+    }
+    else {
+        Set-StrictMode -Version 2.0
+    }
+
+    Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name
+
+    ('{0}-{1}-{2}' -f $Caller, $Exception.GetType().Name, $Line) | Write-Output
+}
+
+<#
     Get-ModuleManifest
 #>
 function Get-ModuleManifest {
@@ -131,12 +168,6 @@ function New-ErrorRecord {
 }
 
 <#
-    Write-Exception
-#>
-function Write-Exception {
-}
-
-<#
     Test-Module
 #>
 function Test-Module {
@@ -165,10 +196,174 @@ function Test-Module {
 
     PROCESS {
         $Name | ForEach-Object -Process {
-            (Get-Module -ListAvailable |
-                Where-Object -Property Name -EQ $_ |
-                Measure-Object |
-                Select-Object -ExpandProperty Count) -gt 0 | Write-Output
+            (Get-Module -ListAvailable | Where-Object -Property Name -EQ $_ | Measure-Object | Select-Object -ExpandProperty Count) -gt 0 | Write-Output
+        }
+    }
+}
+
+<#
+    Write-Exception
+#>
+function Write-Exception {
+    [CmdletBinding()]
+    [OutputType([System.Management.Automation.ErrorRecord])]
+    param (
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [System.Exception]
+        $Exception,
+
+        [Parameter(Mandatory)]
+        [string]
+        $ErrorId,
+
+        [Parameter(Mandatory)]
+        [System.Management.Automation.ErrorCategory]
+        $ErrorCategory,
+
+        [Parameter(Mandatory)]
+        [System.Object]
+        [AllowNull()]
+        $TargetObject
+    )
+
+    BEGIN {
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            Set-StrictMode -Version latest
+        }
+        elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+            Set-StrictMode -Version 3.0
+        }
+        else {
+            Set-StrictMode -Version 2.0
+        }
+
+        Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+    }
+
+    PROCESS {
+        $Exception | ForEach-Object -Process { New-ErrorRecord -Exception $_ -ErrorId $ErrorId -ErrorCategory $ErrorCategory -TargetObject $TargetObject | Write-Output }
+    }
+}
+
+<#
+    Write-Fatal
+#>
+function Write-Fatal {
+    [CmdletBinding(DefaultParameterSetName = 'UsingErrorRecord')]
+    param (
+        [Parameter(Mandatory, ParameterSetName = 'UsingErrorRecord', ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [System.Management.Automation.ErrorRecord]
+        $ErrorRecord,
+
+        [Parameter(Mandatory, ParameterSetName = 'UsingException', ValueFromPipelineByPropertyName)]
+        [System.Exception]
+        $Exception,
+
+        [Parameter(Mandatory, ParameterSetName = 'UsingMessage', ValueFromPipelineByPropertyName)]
+        [string]
+        $Message,
+
+        [Parameter(Mandatory, ParameterSetName = 'UsingException')]
+        [Parameter(Mandatory, ParameterSetName = 'UsingMessage')]
+        [System.Management.Automation.ErrorCategory]
+        $ErrorCategory
+    )
+
+    BEGIN {
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            Set-StrictMode -Version latest
+        }
+        elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+            Set-StrictMode -Version 3.0
+        }
+        else {
+            Set-StrictMode -Version 2.0
+        }
+
+        Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+
+        if ($PSCmdlet.ParameterSetName -eq 'UsingErrorRecord') {
+            $topError = $ErrorRecord
+        }
+        elseif ($PSCmdlet.ParameterSetName -eq 'UsingException') {
+            $topException = $Exception
+        }
+        else {
+            $topException = [System.Exception]::new($Message)
+        }
+    }
+
+    PROCESS {
+        switch ($PSCmdlet.ParameterSetName) {
+            'UsingException' {
+                $errorId = Format-ErrorId -Caller $CmdletName -Exception $Exception -Line $MyInvocation.ScriptLineNumber
+                $Exception | Write-Exception -ErrorId $errorId -ErrorCategory $ErrorCategory -TargetObject $Exception.Source | Write-Error -ErrorAction Continue
+                break
+            }
+
+            'UsingMessage' {
+                $errorId = Format-ErrorId -Caller $CmdletName -Exception [System.Exception]::new() -Line $MyInvocation.ScriptLineNumber
+                $Message | Write-Message -ErrorId $errorId -ErrorCategory $ErrorCategory -TargetObject $Message | Write-Error Continue
+                break
+            }
+
+            default {
+                $ErrorRecord | Write-Error -ErrorAction Continue
+                break
             }
         }
     }
+
+    END {
+        if (Test-Path -LiteralPath variable:topError) {
+            $PSCmdlet.ThrowTerminatingError($topError)
+        }
+        else {
+            throw $topException
+        }
+    }
+}
+
+<#
+    Write-Message
+#>
+function Write-Message {
+    [CmdletBinding()]
+    [OutputType([System.Management.Automation.ErrorRecord])]
+    param (
+        [Parameter(Mandatory, ValueFromPipeline, ValueFromPipelineByPropertyName)]
+        [string]
+        $Message,
+
+        [Parameter(Mandatory)]
+        [string]
+        $ErrorId,
+
+        [Parameter(Mandatory)]
+        [System.Management.Automation.ErrorCategory]
+        $ErrorCategory,
+
+        [Parameter(Mandatory)]
+        [System.Object]
+        [AllowNull()]
+        $TargetObject
+    )
+
+    BEGIN {
+        if ($PSVersionTable.PSVersion.Major -gt 5) {
+            Set-StrictMode -Version latest
+        }
+        elseif ($PSVersionTable.PSVersion.Major -ge 3) {
+            Set-StrictMode -Version 3.0
+        }
+        else {
+            Set-StrictMode -Version 2.0
+        }
+
+        Set-Variable -Name CmdletName -Option ReadOnly -Value $MyInvocation.MyCommand.Name -WhatIf:$false
+    }
+
+    PROCESS {
+        $Message | ForEach-Object -Process { New-ErrorRecord -Exception [System.Exception]::new($_) -ErrorId $ErrorId -ErrorCategory $ErrorCategory -TargetObject $TargetObject | Write-Output }
+    }
+}
