@@ -13,7 +13,9 @@
 
 [![latest version](https://img.shields.io/nuget/vpre/PowerShell2)](https://www.nuget.org/packages/PowerShell2)
 [![download count](https://img.shields.io/nuget/dt/powershell2)](https://www.nuget.org/stats/packages/PowerShell2?groupby=Version)
-[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/build.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/workflows/build.yml?query=branch%3Amain)
+[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-CI.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/powershell-CI.yml?query=branch%3Amain)
+[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-Package.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/powershell-Package.yml?query=branch%3Amain)
+[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-Publish.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/powershell-Publish.yml?query=branch%3Amain)
 
 # PowerShell Template
 
