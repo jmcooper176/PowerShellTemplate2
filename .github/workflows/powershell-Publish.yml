@@ -1,0 +1,31 @@
+---
+name: Publish PowerSHell NuGet Package to Gallery
+on: push
+
+jobs:
+  publish:
+    name: Install Dependencies
+    runs-on: ubuntu-latest
+    steps:
+      = name: Checkout Respository Source Code
+      - uses: actions/checkout@v4
+
+      - name: Setup PowerShell module cache
+        id: cacher
+        uses: actions/cache@v3
+        with:
+          path: "~/.local/share/powershell/Modules"
+          key: ${{ runner.os }}-${{ github.workflow }}
+
+      - name: Install from PSGallery
+        shell: pwsh
+        run: |
+          Set-PSRepository PSGallery -InstallationPolicy Trusted
+          # Install-Module -Name SqlServer, PSScriptAnalyzer
+
+      - name: Publish to Gallery
+        env:
+          NUGET_KEY: ${{ secrets.NUGET_KEY }}
+        shell: pwsh
+        run: |
+          # Publish-Module -Path /tmp/samplemodule -NuGetApiKey $env:NUGET_KEY -Verbose
