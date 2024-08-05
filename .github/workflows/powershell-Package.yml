@@ -1,6 +1,7 @@
 ---
 name: Package PowerSHell NuGet Package for the Gallery
 on: push
+  workflow_dispatch:
 
 jobs:
   package:

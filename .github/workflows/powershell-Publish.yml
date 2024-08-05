@@ -1,6 +1,7 @@
 ---
 name: Publish PowerSHell NuGet Package to Gallery
 on: push
+  workflow_dispatch:
 
 jobs:
   publish:

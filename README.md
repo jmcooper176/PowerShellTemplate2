@@ -13,9 +13,9 @@
 
 [![latest version](https://img.shields.io/nuget/vpre/PowerShell2)](https://www.nuget.org/packages/PowerShell2)
 [![download count](https://img.shields.io/nuget/dt/powershell2)](https://www.nuget.org/stats/packages/PowerShell2?groupby=Version)
-[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-CI.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/powershell-CI.yml?query=branch%3Amain)
-[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-Package.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/powershell-Package.yml?query=branch%3Amain)
-[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-Publish.yml?branch=main)](https://github.com/jmcooper176/PowerShell2/actions/powershell-Publish.yml?query=branch%3Amain)
+[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-CI.yml?branch=master)](https://github.com/jmcooper176/PowerShell2/actions/powershell-CI.yml?query=branch%3Amaster)
+[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-Package.yml?branch=master)](https://github.com/jmcooper176/PowerShell2/actions/powershell-Package.yml?query=branch%3Amaster)
+[![build status](https://img.shields.io/github/actions/workflow/status/jmcooper176/PowerShell2/.github/workflows/powershell-Publish.yml?branch=master)](https://github.com/jmcooper176/PowerShell2/actions/powershell-Publish.yml?query=branch%3Amaster)
 
 # PowerShell Template
 
@@ -49,16 +49,16 @@ code necessary to deploy them.
 
 * [Fork the PowerShell2 repository](https://github.com/jmcooper176/PowerShell2)
  into your own GitHub repository
-* Clone the PowerShell2 repository from your fork (`git clone https://github.com/yourdomain/PowerShell2.git`)
+* Clone the PowerShell2 repository from your fork (`git clone https://github.com/yourdomaster/PowerShell2.git`)
  into the directory of your choice
 
  ### Pull Request Expectations:
 
  * Pick an [outstanding WiX issue](https://github.com/jmcooper176/PowerShell2/issues/issues?q=is%3Aissue+is%3Aopen+label%3A%22up+for+grabs%22) (or [create a new one](https://github.com/jmcooper176/PowerShell2/issues/issues/new/choose)). Add a comment requesting that you be assigned to the issue. Wait for confirmation.
- * To create a pull request, [fork a new branch](https://github.com/jmcooper176/PowerShell2/) from the `main` branch
+ * To create a pull request, [fork a new branch](https://github.com/jmcooper176/PowerShell2/) from the `master` branch
  * Make changes to effect whatever changed behavior is required for the pull request
  * Push the changes to your repository origin as needed
- * If the `main` branch has changed since you created your branch, **rebase** to the latest updates.
+ * If the `master` branch has changed since you created your branch, **rebase** to the latest updates.
  * If needed (ie, you squashed or rebased), do a force push of your branch
  * Create a pull request with your branch against the PowerShell2 repository.**
 
