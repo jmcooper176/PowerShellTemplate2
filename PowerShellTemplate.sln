@@ -5,6 +5,29 @@ VisualStudioVersion = 17.10.35013.160
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PowerShellTemplate", "PowerShellTemplate\PowerShellTemplate.pssproj", "{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}"
 EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PowerShellEnumTemplate", "PowerShellEnumTemplate\PowerShellEnumTemplate.pssproj", "{AD502AC3-CD70-4B0D-8C44-64DADC0C4FD5}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "TypeAcceleratorModule", "TypeAcceleratorModule\TypeAcceleratorModule.pssproj", "{B7885811-C993-4708-9D63-B9A392F2933B}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "UtilityModule", "UtilityModule\UtilityModule.pssproj", "{333DF9F0-9ECA-4ED8-AD0B-FAFE97445573}"
+EndProject
+Project("{F5034706-568F-408A-B7B3-4D38C6DB8A32}") = "PowerShellClassTemplate", "PowerShellClassTemplate\PowerShellClassTemplate.pssproj", "{943EF6FC-DAE8-4128-BD34-80864BA97DFB}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7C4F0413-12E1-4ACF-8731-B32EDB72B0CB}"
+	ProjectSection(SolutionItems) = preProject
+		.gitattributes = .gitattributes
+		.gitignore = .gitignore
+		CONTRIBUTING.md = CONTRIBUTING.md
+		LICENSE.txt = LICENSE.txt
+		Script\PostBuild.ps1 = Script\PostBuild.ps1
+		Script\PostTest.ps1 = Script\PostTest.ps1
+		PowerShellTemplate.licenseheader = PowerShellTemplate.licenseheader
+		Script\PreBuild.ps1 = Script\PreBuild.ps1
+		Script\PreTest.ps1 = Script\PreTest.ps1
+		README.md = README.md
+		SECURITY.md = SECURITY.md
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -15,6 +38,22 @@ Global
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CAFC0C6-A428-4D30-A9F9-700E829FEA51}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AD502AC3-CD70-4B0D-8C44-64DADC0C4FD5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AD502AC3-CD70-4B0D-8C44-64DADC0C4FD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AD502AC3-CD70-4B0D-8C44-64DADC0C4FD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AD502AC3-CD70-4B0D-8C44-64DADC0C4FD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B7885811-C993-4708-9D63-B9A392F2933B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B7885811-C993-4708-9D63-B9A392F2933B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B7885811-C993-4708-9D63-B9A392F2933B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B7885811-C993-4708-9D63-B9A392F2933B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{333DF9F0-9ECA-4ED8-AD0B-FAFE97445573}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{333DF9F0-9ECA-4ED8-AD0B-FAFE97445573}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{333DF9F0-9ECA-4ED8-AD0B-FAFE97445573}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{333DF9F0-9ECA-4ED8-AD0B-FAFE97445573}.Release|Any CPU.Build.0 = Release|Any CPU
+		{943EF6FC-DAE8-4128-BD34-80864BA97DFB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{943EF6FC-DAE8-4128-BD34-80864BA97DFB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{943EF6FC-DAE8-4128-BD34-80864BA97DFB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{943EF6FC-DAE8-4128-BD34-80864BA97DFB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

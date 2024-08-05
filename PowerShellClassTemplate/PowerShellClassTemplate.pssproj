@@ -1,0 +1,89 @@
+﻿<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <ZeroDay>1/1/2000</ZeroDay>
+    <UtcNow>
+    </UtcNow>
+    <Major>1</Major>
+    <Minor>0</Minor>
+    <Build>0</Build>
+    <Patch>$(Build)</Patch>
+    <Revision>0</Revision>
+    <Release>0</Release>
+    <Year>2024</Year>
+  </PropertyGroup>
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{943ef6fc-dae8-4128-bd34-80864ba97dfb}</ProjectGuid>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>PowerShellTemplate</RootNamespace>
+    <AssemblyName>PowerShellTemplate</AssemblyName>
+    <Name>PowerShellClassTemplate</Name>
+    <PreBuildScript>..\Script\PreBuild.ps1 -Name 'PowerShellClassTemplate'</PreBuildScript>
+    <PostBuildScript>..\Script\PostBuild.ps1 -Name 'PowerShellClassTemplate'</PostBuildScript>
+    <PackageAsExecutable>False</PackageAsExecutable>
+    <Bundle>True</Bundle>
+    <Obfuscate>False</Obfuscate>
+    <HideConsoleWindow>False</HideConsoleWindow>
+    <RequireElevation>False</RequireElevation>
+    <PackageModules>True</PackageModules>
+    <HighDPISupport>False</HighDPISupport>
+    <FileVersion>$(Major).$(Minor).$(Build).$(Revision)</FileVersion>
+    <FileDescription>Class PowerShell Template</FileDescription>
+    <ProductName>PowerShellTemplate</ProductName>
+    <ProductVersion>$(Major).$(Minor)$(Build)</ProductVersion>
+    <Author>John Merryweather Cooper</Author>
+    <CompanyName>John Merryweather Cooper</CompanyName>
+    <Copyright>Copyright (c) $(Year), $(Author).  All Rights Reserved.</Copyright>
+    <PowerShellVersion>5.1</PowerShellVersion>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\TypeAcceleratorModule\TypeAcceleratorModule.pssproj">
+      <Name>TypeAcceleratorModule</Name>
+      <Project>{b7885811-c993-4708-9d63-b9a392f2933b}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+    <ProjectReference Include="..\UtilityModule\UtilityModule.pssproj">
+      <Name>UtilityModule</Name>
+      <Project>{333df9f0-9eca-4ed8-ad0b-fafe97445573}</Project>
+      <Private>True</Private>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="PowerShellClassTemplate.psd1" />
+    <Compile Include="PowerShellClassTemplate.psm1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Test Include="PowerShellClassTemplate.tests.ps1" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\PowerShellTemplate.licenseheader">
+      <Link>PowerShellTemplate.licenseheader</Link>
+    </Content>
+  </ItemGroup>
+  <Target Name="Test" DependsOnTargets="Build">
+    <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'PowerShellClassTemplate'" />
+    <Message Importance="High" Text="Running 'PowerShellClassTemplate' Pester Unit Tests" />
+    <RunPowerShellCommand Command="Invoke-Pester -Path '%(Test.FullPath)' -Verbose" />
+    <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'PowerShellClassTemplate'" />
+  </Target>
+  <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets"
+          Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
+</Project>

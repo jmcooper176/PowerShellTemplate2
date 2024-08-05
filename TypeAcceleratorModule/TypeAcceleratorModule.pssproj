@@ -14,13 +14,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6CAFC0C6-A428-4d30-A9F9-700E829FEA51</ProjectGuid>
+    <ProjectGuid>{b7885811-c993-4708-9d63-b9a392f2933b}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>PowerShellTemplate</RootNamespace>
     <AssemblyName>PowerShellTemplate</AssemblyName>
-    <Name>PowerShellTemplate</Name>
-    <PreBuildScript>..\Script\PreBuild.ps1 -Name 'PowerShellTemplate'</PreBuildScript>
-    <PostBuildScript>..\Script\PostBuild.ps1 -Name 'PowerShellTemplate'</PostBuildScript>
+    <Name>TypeAcceleratorModule</Name>
+    <PreBuildScript>..\Script\PreBuild.ps1 -Name 'TypeAcceleratorModule'</PreBuildScript>
+    <PostBuildScript>..\Script\PostBuild.ps1 -Name 'TypeAcceleratorModule'</PostBuildScript>
     <PackageAsExecutable>False</PackageAsExecutable>
     <Bundle>True</Bundle>
     <Obfuscate>False</Obfuscate>
@@ -29,7 +29,7 @@
     <PackageModules>True</PackageModules>
     <HighDPISupport>False</HighDPISupport>
     <FileVersion>$(Major).$(Minor).$(Build).$(Revision)</FileVersion>
-    <FileDescription>Basic PowerShell Template</FileDescription>
+    <FileDescription>Type Accelerator PowerShell Module</FileDescription>
     <ProductName>PowerShellTemplate</ProductName>
     <ProductVersion>$(Major).$(Minor)$(Build)</ProductVersion>
     <Author>John Merryweather Cooper</Author>
@@ -46,48 +46,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Version>$(Major).$(Minor).$(Build).$(Revision)</Version>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Alpha|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Alpha\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PreId>a$(Release)</PreId>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Beta\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PreId>b$(Release)</PreId>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseCandidate|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\ReleaseCandidate\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PreId>rc$(Release)</PreId>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -95,18 +53,12 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-    <PreId />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="PowerShellTemplate.licenseheader" />
+    <Compile Include="TypeAcceleratorModule.psd1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PowerShellTemplate.psd1" />
-    <Compile Include="PowerShellTemplate.psm1" />
-  </ItemGroup>
-  <ItemGroup>
-    <Test Include="PowerShellTemplate.tests.ps1" />
+    <Test Include="TypeAcceleratorModule.tests.ps1" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\UtilityModule\UtilityModule.pssproj">
@@ -115,11 +67,14 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="PowerShellTemplate.licenseheader" />
+  </ItemGroup>
   <Target Name="Test" DependsOnTargets="Build">
-    <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'PowerShellTemplate'" />
-    <Message Importance="High" Text="Running 'PowerShellTemplate' Pester Unit Tests" />
+    <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'TypeAcceleratorModule'" />
+    <Message Importance="High" Text="Running 'TypeAcceleratorModule' Pester Unit Tests" />
     <RunPowerShellCommand Command="Invoke-Pester -Path '%(Test.FullPath)' -Verbose" />
-    <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'PowerShellTemplate'" />
+    <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'TypeAcceleratorModule'" />
   </Target>
   <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets"
           Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />

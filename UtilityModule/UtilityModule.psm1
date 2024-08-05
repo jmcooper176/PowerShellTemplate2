@@ -136,7 +136,7 @@ function New-ErrorRecord {
         [Parameter(Mandatory)]
         [ValidateSet()]
         [System.Management.Automation.ErrorCategory]
-        $ErrorCategory,
+        $Category,
 
         [Parameter(Mandatory)]
         [AllowNull()]
@@ -159,7 +159,7 @@ function New-ErrorRecord {
     $argumentList = New-Object -TypeName System.Collections.ArrayList | Out-Null
     $argumentList.Add($Exception) | Out-Null
     $argumentList.Add($ErrorId) | Out-Null
-    $argumentList.Add($ErrorCategory) | Out-Null
+    $argumentList.Add($Category) | Out-Null
     $argumentList.Add($TargetObject) | Out-Null
 
     if ($PSCmdlet.ShouldProcess($Exception.GetType().Name, $CmdletName)) {
@@ -218,7 +218,7 @@ function Write-Exception {
 
         [Parameter(Mandatory)]
         [System.Management.Automation.ErrorCategory]
-        $ErrorCategory,
+        $Category,
 
         [Parameter(Mandatory)]
         [System.Object]
@@ -241,7 +241,7 @@ function Write-Exception {
     }
 
     PROCESS {
-        $Exception | ForEach-Object -Process { New-ErrorRecord -Exception $_ -ErrorId $ErrorId -ErrorCategory $ErrorCategory -TargetObject $TargetObject | Write-Output }
+        $Exception | ForEach-Object -Process { New-ErrorRecord -Exception $_ -ErrorId $ErrorId -Category $Category -TargetObject $TargetObject | Write-Output }
     }
 }
 
@@ -266,7 +266,7 @@ function Write-Fatal {
         [Parameter(Mandatory, ParameterSetName = 'UsingException')]
         [Parameter(Mandatory, ParameterSetName = 'UsingMessage')]
         [System.Management.Automation.ErrorCategory]
-        $ErrorCategory
+        $Category
     )
 
     BEGIN {
@@ -296,14 +296,15 @@ function Write-Fatal {
     PROCESS {
         switch ($PSCmdlet.ParameterSetName) {
             'UsingException' {
-                $errorId = Format-ErrorId -Caller $CmdletName -Exception $Exception -Line $MyInvocation.ScriptLineNumber
-                $Exception | Write-Exception -ErrorId $errorId -ErrorCategory $ErrorCategory -TargetObject $Exception.Source | Write-Error -ErrorAction Continue
+                $errorId = Format-ErrorId -Caller $CmdletName -Exception $Exception -Line ($MyInvocation.ScriptLineNumber)
+                $Exception | Write-Exception -ErrorId $errorId -Category $Category -TargetObject $Exception.Source | Write-Error -ErrorAction Continue
                 break
             }
 
             'UsingMessage' {
-                $errorId = Format-ErrorId -Caller $CmdletName -Exception [System.Exception]::new() -Line $MyInvocation.ScriptLineNumber
-                $Message | Write-Message -ErrorId $errorId -ErrorCategory $ErrorCategory -TargetObject $Message | Write-Error Continue
+                $Exception = [System.Exception]::new($Message)
+                $errorId = Format-ErrorId -Caller $CmdletName -Exception $Exception -Line ($MyInvocation.ScriptLineNumber)
+                $Message | Write-Message -ErrorId $errorId -Category $Category -TargetObject $Message | Write-Error Continue
                 break
             }
 
@@ -341,7 +342,7 @@ function Write-Message {
 
         [Parameter(Mandatory)]
         [System.Management.Automation.ErrorCategory]
-        $ErrorCategory,
+        $Category,
 
         [Parameter(Mandatory)]
         [System.Object]
@@ -364,6 +365,6 @@ function Write-Message {
     }
 
     PROCESS {
-        $Message | ForEach-Object -Process { New-ErrorRecord -Exception [System.Exception]::new($_) -ErrorId $ErrorId -ErrorCategory $ErrorCategory -TargetObject $TargetObject | Write-Output }
+        $Message | ForEach-Object -Process { New-ErrorRecord -Exception [System.Exception]::new($_) -ErrorId $ErrorId -Category $Category -TargetObject $TargetObject | Write-Output }
     }
 }

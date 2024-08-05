@@ -14,13 +14,13 @@
   <PropertyGroup>
     <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
     <SchemaVersion>2.0</SchemaVersion>
-    <ProjectGuid>6CAFC0C6-A428-4d30-A9F9-700E829FEA51</ProjectGuid>
+    <ProjectGuid>{ad502ac3-cd70-4b0d-8c44-64dadc0c4fd5}</ProjectGuid>
     <OutputType>Exe</OutputType>
     <RootNamespace>PowerShellTemplate</RootNamespace>
     <AssemblyName>PowerShellTemplate</AssemblyName>
-    <Name>PowerShellTemplate</Name>
-    <PreBuildScript>..\Script\PreBuild.ps1 -Name 'PowerShellTemplate'</PreBuildScript>
-    <PostBuildScript>..\Script\PostBuild.ps1 -Name 'PowerShellTemplate'</PostBuildScript>
+    <Name>PowerShellEnumTemplate</Name>
+    <PreBuildScript>..\Script\PreBuild.ps1 -Name 'PowerShellEnumTemplate'</PreBuildScript>
+    <PostBuildScript>..\Script\PostBuild.ps1 -Name 'PowerShellEnumTemplate'</PostBuildScript>
     <PackageAsExecutable>False</PackageAsExecutable>
     <Bundle>True</Bundle>
     <Obfuscate>False</Obfuscate>
@@ -46,48 +46,6 @@
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <Version>$(Major).$(Minor).$(Build).$(Revision)</Version>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Alpha|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Alpha\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PreId>a$(Release)</PreId>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Beta|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Beta\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PreId>b$(Release)</PreId>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'ReleaseCandidate|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\ReleaseCandidate\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <PreId>rc$(Release)</PreId>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-  </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
@@ -95,31 +53,34 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
-    <Version>$(Major).$(Minor).$(Build)</Version>
-    <PreId />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="PowerShellTemplate.licenseheader" />
+    <Compile Include="PowerShellEnumTemplate.psd1" />
+    <Compile Include="PowerShellEnumTemplate.psm1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="PowerShellTemplate.psd1" />
-    <Compile Include="PowerShellTemplate.psm1" />
+    <Test Include="PowerShellEnumTemplate.tests.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Test Include="PowerShellTemplate.tests.ps1" />
-  </ItemGroup>
-  <ItemGroup>
+    <ProjectReference Include="..\TypeAcceleratorModule\TypeAcceleratorModule.pssproj">
+      <Name>TypeAcceleratorModule</Name>
+      <Project>{b7885811-c993-4708-9d63-b9a392f2933b}</Project>
+      <Private>True</Private>
+    </ProjectReference>
     <ProjectReference Include="..\UtilityModule\UtilityModule.pssproj">
       <Name>UtilityModule</Name>
       <Project>{333df9f0-9eca-4ed8-ad0b-fafe97445573}</Project>
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="PowerShellTemplate.licenseheader" />
+  </ItemGroup>
   <Target Name="Test" DependsOnTargets="Build">
-    <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'PowerShellTemplate'" />
-    <Message Importance="High" Text="Running 'PowerShellTemplate' Pester Unit Tests" />
+    <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'PowerShellEnumTemplate'" />
+    <Message Importance="High" Text="Running 'PowerShellEnumTemplate' Pester Unit Tests" />
     <RunPowerShellCommand Command="Invoke-Pester -Path '%(Test.FullPath)' -Verbose" />
-    <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'PowerShellTemplate'" />
+    <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'PowerShellEnumTemplate'" />
   </Target>
   <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets"
           Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
