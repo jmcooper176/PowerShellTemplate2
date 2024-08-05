@@ -13,6 +13,7 @@ jobs:
       - name: Perform a Pester test from the Tests.ps1 file
         shell: pwsh
         run: |
-          Get-ChildItem -LiteralPath ${{ github.workspace }} -Include '*.tests.ps1' ForEach-Object -Process [
-            Invoke-Pester -Path $_.FullName -Verbose -Passthru
-          }
+          Get-ChildItem -LiteralPath ${{ github.workspace }} -Include '*.tests.ps1' | 
+            ForEach-Object -Process [
+              Invoke-Pester -Path $_.FullName -Verbose -Passthru
+            }
