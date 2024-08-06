@@ -99,9 +99,6 @@
     <PreId />
   </PropertyGroup>
   <ItemGroup>
-    <Content Include="PowerShellTemplate.licenseheader" />
-  </ItemGroup>
-  <ItemGroup>
     <Compile Include="PowerShellTemplate.psd1" />
     <Compile Include="PowerShellTemplate.psm1" />
   </ItemGroup>
@@ -115,12 +112,16 @@
       <Private>True</Private>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\PowerShellTemplate.licenseheader">
+      <Link>PowerShellTemplate.licenseheader</Link>
+    </Content>
+  </ItemGroup>
   <Target Name="Test" DependsOnTargets="Build">
     <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'PowerShellTemplate'" />
     <Message Importance="High" Text="Running 'PowerShellTemplate' Pester Unit Tests" />
     <RunPowerShellCommand Command="Invoke-Pester -Path '%(Test.FullPath)' -Verbose" />
     <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'PowerShellTemplate'" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets"
-          Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
+  <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets" Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
 </Project>

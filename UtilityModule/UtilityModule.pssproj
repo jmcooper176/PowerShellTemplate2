@@ -62,7 +62,9 @@
     <Test Include="UtilityModule.tests.ps1" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="PowerShellTemplate.licenseheader" />
+    <Content Include="..\PowerShellTemplate.licenseheader">
+      <Link>PowerShellTemplate.licenseheader</Link>
+    </Content>
   </ItemGroup>
   <Target Name="Test" DependsOnTargets="Build">
     <RunPowerShellCommand Command="..\Script\PreTest.ps1 -Name 'UtilityModule'" />
@@ -70,6 +72,5 @@
     <RunPowerShellCommand Command="Invoke-Pester -Path '%(Test.FullPath)' -Verbose" />
     <RunPowerShellCommand Command="..\Script\PostTest.ps1 -Name 'UtilityModule'" />
   </Target>
-  <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets"
-          Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
+  <Import Project="$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets" Condition="Exists('$(MSBuildExtensionsPath)\PowerShell Tools for Visual Studio\PowerShellTools.targets')" />
 </Project>
